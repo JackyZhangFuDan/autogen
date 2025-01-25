@@ -7,7 +7,7 @@ using Microsoft.AutoGen.Contracts;
 using Microsoft.AutoGen.Core;
 
 // send a message to the agent
-var builder = WebApplication.CreateBuilder();
+var builder = new HostApplicationBuilder();
 // put these in your environment or appsettings.json
 builder.Configuration["HelloAIAgents:ModelType"] = "azureopenai";
 builder.Configuration["HelloAIAgents:LlmModelName"] = "gpt-3.5-turbo";
@@ -16,7 +16,7 @@ if (Environment.GetEnvironmentVariable("AZURE_OPENAI_CONNECTION_STRING") == null
 {
     throw new InvalidOperationException("AZURE_OPENAI_CONNECTION_STRING not set, try something like AZURE_OPENAI_CONNECTION_STRING = \"Endpoint=https://TODO.openai.azure.com/;Key=TODO;Deployment=TODO\"");
 }
-builder.Configuration["ConectionStrings:HelloAIAgents"] = Environment.GetEnvironmentVariable("AZURE_OPENAI_CONNECTION_STRING");
+builder.Configuration["ConnectionStrings:HelloAIAgents"] = Environment.GetEnvironmentVariable("AZURE_OPENAI_CONNECTION_STRING");
 builder.AddChatCompletionService("HelloAIAgents");
 var agentTypes = new AgentTypes(new Dictionary<string, Type>
 {
